@@ -1,12 +1,10 @@
 use bip39::Mnemonic;
-use bip32::{ExtendedPrivateKey,XPrv};
-use solana_sdk::signer::{keypair::Keypair, SeedDerivable, Signer,
+use solana_sdk::signer::{keypair::Keypair,  Signer,
                         keypair::keypair_from_seed_and_derivation_path,
-                        keypair::keypair_from_seed,
                         };
 use solana_derivation_path::DerivationPath;
 //use solana_keypair::{keypair_from_seed};
-use std::{error, str::FromStr};
+use std::str::FromStr;
 use serde_json;
 use std::fs::File;
 use std::io::Write;
@@ -65,7 +63,6 @@ fn write_keypair(keypair:Keypair) -> Result<(), Box<dyn std::error::Error>> {
 
     // 将 JSON 字符串写入文件
     file.write_all(json_string.as_bytes())?;
-    ///println!("json_string length:{}:",json_string.len());
     println!("Keypair private key has been saved to {}",&file_path);
     println!("switch to the uer: \n solana config set --keypair {}",&file_path);
 
