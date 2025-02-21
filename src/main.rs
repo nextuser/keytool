@@ -39,7 +39,7 @@ pub fn main(){
     let mnemonic = bip39::Mnemonic::from_str(&phrase).expect("invalid seed phrase");
     let keypair = generate_keypair(&mnemonic);
 
-    println!("pk bs58:{}", bs58::encode(keypair.secret().as_bytes()).into_string());
+    println!("secret key bs58: {}", bs58::encode(keypair.secret().as_bytes()).into_string());
     _ = write_keypair(keypair);
 }
 
@@ -48,7 +48,7 @@ fn write_keypair(keypair:Keypair) -> Result<(), Box<dyn std::error::Error>> {
     // 获取 Keypair 的私钥字节数组
     let private_key_bytes = keypair.to_bytes();
     let addr = bs58::encode(keypair.pubkey().to_bytes()).into_string();
-    println!("public key {}",addr);
+    println!("public key bs58: {}",addr);
 
     // 将字节数组转换为 JSON 数组
     let json_array: Vec<u8> = private_key_bytes.to_vec();
@@ -63,8 +63,8 @@ fn write_keypair(keypair:Keypair) -> Result<(), Box<dyn std::error::Error>> {
 
     // 将 JSON 字符串写入文件
     file.write_all(json_string.as_bytes())?;
-    println!("Keypair private key has been saved to {}",&file_path);
-    println!("switch to the uer: \n solana config set --keypair {}",&file_path);
+    println!("Keypair private key has been saved to {} \n",&file_path);
+    println!("switch to the user: \n solana config set --keypair {}",&file_path);
 
     Ok(())
 }
