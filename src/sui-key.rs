@@ -37,7 +37,8 @@ fn main() {
     let mut private_key_with_flag = vec![0x00]; // Ed25519 标志
     private_key_with_flag.extend_from_slice(&keypair.key);
     let keystore_entry = general_purpose::STANDARD.encode(&private_key_with_flag);
-    println!("sui.keystore Entry: {}", keystore_entry);
+    println!("sui.keystore Entry: {}",keystore_entry);
+
 
 
     let public_key = keypair.public_key().to_vec();
